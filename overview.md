@@ -39,3 +39,10 @@
                                ^
                                |
                             data + extensions
+
+# BOOKING:
+    * pattern: S.O.L.I.D. (OOP)
+    * pattern: MVT (MVC)
+    * pattern: ...  /design
+
+    + templating
