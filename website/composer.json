@@ -1,0 +1,19 @@
+{
+    "name": "pet/booking",
+    "type": "project",
+    "license": "Custom",
+    "autoload": {
+        "psr-4": {
+            "Pet\\Booking\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andruscenco"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "twig/twig": "4.x-dev"
+    }
+}
