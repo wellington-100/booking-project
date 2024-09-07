@@ -9,10 +9,10 @@
 <body>
     <h1>{{ title }}</h1>
     <ol>
-        {% for tour in data %}
+        {% for review in data %}
             <li>
-                <h2>{{tour.title}}</h2>
-                <p>{{tour.price}}</p>
+                <h2>{{review.author_name}}</h2>
+                <p>{{review.body}}</p>
             </li>
         {% endfor %}
     </ol>

@@ -1,33 +1,26 @@
 <?php
 
-    // for class autoloading (do not remove!)
-    require_once './vendor/autoload.php';
+    require_once './src/bootstrap.php';
 
-    //TWIG CONFIGURATION
-    $loader = new \Twig\Loader\FilesystemLoader('./templates');
+    $page = $_GET['page'] ?? 'home';
 
-    $twig = new \Twig\Environment($loader, [
-        // 'cache' => '/path/to/compilation_cache',
-    ]);
-
-    $title = 'Booking Agency';
-
-    // connect to db fetch data - mysqli
-    $pdo = new PDO("mysql:host=booking_mariadb;dbname=booking;port=3306", "booking", "booking");
-    $stmt = $pdo->query('SELECT * FROM tours');
-
-    $tours = [];
-
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        $tours[] = $row;
+    if ($page === 'home') {
+        $tours = getInfo('tours');
+        $title = 'Our Fall Tours';
+        renderPage($title, 'home', $tours);
+    } else if ($page === 'reviews') {
+        $reviews = getInfo('reviews');
+        $title = 'What people think';
+        renderPage($title, 'reviews', $reviews);
+    } else {
+        renderPage('THE PAGE YOU ARE LOOKING FOR WAS NOT FOUND', '404');
     }
 
 
 
 
 
-    $template = $twig->load('home.html.twig');
-    print($template->render([
-        'title' => $title,
-        'tours' => $tours
-    ]));
+
+    
+
+    
