@@ -1,26 +1,7 @@
 <?php
 
-    // function renderHome($title, $tours) {
-    //     global $twig;
-    //     $template = $twig->load('home.html.twig');
-    //     print ($template->render([
-    //         'title' => $title,
-    //         'tours' => $tours
-    //     ]));
-    // }
-
-    // function renderReviews($title, $reviews) {
-    //     global $twig;
-    //     $template = $twig->load('reviews.html.twig');
-    //     print ($template->render([
-    //         'title' => $title,
-    //         'reviews' => $reviews
-    //     ]));
-    // }
-
     //DRY render
-    function renderPage($title,  $template_name, $data='')
-    {
+    function renderPage($title,  $template_name, $data='') {
         global $twig;
         $template = $twig->load($template_name.'.html.twig');
         print ($template->render([
@@ -28,11 +9,20 @@
             'data' => $data
         ]));
     }
+    function getTourById($tour_id){
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT tours.*, price.value AS price_value, price.currency AS price_currency
+                                FROM tours
+                                JOIN price ON tours.id = price.tour_id
+                                WHERE tours.id = ?");
+        $stmt->execute([$tour_id]);
 
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-
-    // function render404() {
-    //     global $twig;
-    //     $template = $twig->load('404.html.twig');
-    //     print ($template->render());
-    // }
+    function deleteTourById($tour_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM tours WHERE id = ?");
+        $stmt->execute([$tour_id]);
+        return $stmt->rowCount() > 0;
+    }
