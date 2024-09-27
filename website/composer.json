@@ -1,10 +1,10 @@
 {
-    "name": "pet/booking",
+    "name": "student/booking",
     "type": "project",
     "license": "Custom",
     "autoload": {
         "psr-4": {
-            "Pet\\Booking\\": "src/"
+            "Student\\Booking\\": "src/"
         }
     },
     "authors": [
